@@ -9,7 +9,7 @@ const StudioNavbar: FC<NavbarProps> = (props) => {
     <Stack>
       <Card padding={3}>
         <Flex align="center">
-          <Link href="/public">
+          <Link href="/">
             <Flex align="center" gap={2}>
               <HiArrowSmLeft />
               <Text size={1}>Home</Text>
