@@ -1,5 +1,3 @@
-import { FC } from "react";
-import logo from "@/assets/images/white-logo.png";
 import Image from "next/image";
 
 type LogoProps = {
@@ -7,15 +5,14 @@ type LogoProps = {
   width?: number;
 };
 
-const Logo: FC<LogoProps> = ({ height, width }) => {
+export default function Logo({ height, width }: LogoProps) {
   return (
     <Image
       className="rounded-full"
-      src={logo}
+      src="/static/images/white-logo.png"
       width={width ?? 65}
       height={height ?? 65}
       alt="Malik Danial's logo"
     />
   );
-};
-export default Logo;
+}

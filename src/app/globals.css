@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.nav {
+  unicode-bidi: isolate;
+}
+
+.nav .active .nav-indicator {
+  @apply w-16 bg-slate-200;
+}
+
+.nav .active .nav-text {
+  @apply text-slate-200;
+}

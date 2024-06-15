@@ -1,10 +1,9 @@
-import { FC } from "react";
 import type { NavbarProps } from "sanity";
 import { Card, Stack, Text, Flex } from "@sanity/ui";
 import { HiArrowSmLeft } from "react-icons/hi";
 import Link from "next/link";
 
-const StudioNavbar: FC<NavbarProps> = (props) => {
+export default function StudioNavbar(props: NavbarProps) {
   return (
     <Stack>
       <Card padding={3}>
@@ -20,5 +19,4 @@ const StudioNavbar: FC<NavbarProps> = (props) => {
       {props.renderDefault(props)} {/* Render the default navbar */}
     </Stack>
   );
-};
-export default StudioNavbar;
+}
