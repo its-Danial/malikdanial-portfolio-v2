@@ -33,6 +33,7 @@ export default function RootLayout({
         sizes="16x16"
         href="/favicon/favicon-16x16.png"
       />
+      <link rel="icon" href="/favicon.ico" />
       <body className={inter.className}>{children}</body>
     </html>
   );
