@@ -17,7 +17,7 @@ export default function RootLayout({
   let { mouseX, mouseY, handleMouseMove } = useMouseMove();
 
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <link
         rel="apple-touch-icon"
         sizes="180x180"
