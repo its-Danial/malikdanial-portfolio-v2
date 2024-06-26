@@ -37,12 +37,12 @@ export const useActiveSectionObserver = (sections: Section[]) => {
           setActiveSectionId(targetElement.id);
         }
       },
-      10,
+      20,
     );
 
     const options: IntersectionObserverInit = {
       root: null,
-      rootMargin: "0px 0px -40% 0px",
+      rootMargin: "0px 0px -30% 0px",
       threshold: Array.from({ length: 100 }, (_, i) => i / 100),
     };
 
