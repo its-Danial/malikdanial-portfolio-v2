@@ -10,8 +10,8 @@ export default function Nav() {
       id: "about",
     },
     {
-      title: "Skills",
-      id: "skills",
+      title: "Experience",
+      id: "experience",
     },
     {
       title: "Projects",
