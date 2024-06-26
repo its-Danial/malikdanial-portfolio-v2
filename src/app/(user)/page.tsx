@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import Nav from "@/components/nav";
 import SocialLinks from "@/components/nav/SocialLinks";
 import About from "@/components/section/About";
-import Link from "next/link";
+import Experience from "@/components/section/Experience";
+import Projects from "@/components/section/Projects";
 
 export const metadata: Metadata = {
   title: "Danial | Software Engineer",
@@ -22,17 +24,16 @@ export default function Home() {
             Software Engineer II
           </h2>
           <p className="mt-4 max-w-xs leading-normal">
-            I build engaging, and accessible digital experiences.
+            I build engaging and accessible digital experiences.
           </p>
           <Nav />
         </div>
         <SocialLinks />
       </header>
       <main className="pt-24 lg:w-1/2 lg:py-24">
-        <About id="about" />
-        <About id="skills" />
-        <About id="projects" />
-        <About id="contact" />
+        <About />
+        <Experience />
+        <Projects />
       </main>
     </div>
   );
