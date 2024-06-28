@@ -36,6 +36,7 @@ export default function RootLayout({
         href="/favicon/favicon-16x16.png"
       />
       <link rel="icon" href="/favicon.ico" />
+      {/* <WebAnalytics /> */}
       <body
         className={`${inter.className} bg-slate-900 leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900`}
       >
