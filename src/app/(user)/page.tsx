@@ -5,6 +5,7 @@ import Nav from "@/components/nav";
 import SocialLinks from "@/components/nav/SocialLinks";
 import About from "@/components/section/About";
 import Experience from "@/components/section/Experience";
+import Footer from "@/components/section/Footer";
 import Projects from "@/components/section/Projects";
 
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function Home() {
         <About />
         <Experience />
         <Projects />
+        <Footer />
       </main>
     </div>
   );
