@@ -1,4 +1,4 @@
-import { defineType, defineArrayMember } from "sanity";
+import { defineArrayMember, defineType } from "sanity";
 
 /**
  * This is the schema type for block content used in the post document type
@@ -68,6 +68,16 @@ export default defineType({
           name: "alt",
           type: "string",
           title: "Alternative Text",
+        },
+      ],
+    }),
+    defineArrayMember({
+      type: "file",
+      fields: [
+        {
+          name: "description",
+          type: "string",
+          title: "Description",
         },
       ],
     }),
