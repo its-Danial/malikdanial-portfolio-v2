@@ -1,4 +1,20 @@
-export default function About() {
+import { PortableText, PortableTextComponents } from "@portabletext/react";
+import { BlockContent } from "../../../sanity.types";
+
+export default function About({ summary }: { summary: BlockContent }) {
+  const portableTextComponents: PortableTextComponents = {
+    block: ({ children }) => {
+      return <p className="mb-4">{children}</p>;
+    },
+    marks: {
+      strong: ({ children }) => (
+        <b className="text-gray-200 hover:text-teal-300 focus-visible:text-teal-300">
+          {children}
+        </b>
+      ),
+    },
+  };
+
   return (
     <section
       id="about"
@@ -11,36 +27,7 @@ export default function About() {
         </h2>
       </div>
       <div>
-        <p className="mb-4">
-          Currently employed at Bayt.com, specializing in front‐end development.
-          Actively leading project migrations to the latest technologies,
-          designing and maintaining an custom web components widget for seamless
-          third party integration, and prioritizing application performance
-          optimization.
-        </p>
-        <p>
-          I work on personal projects using{" "}
-          <b className="text-gray-200 hover:text-teal-300 focus-visible:text-teal-300">
-            React.js/Next.js
-          </b>{" "}
-          with{" "}
-          <b className="text-gray-200 hover:text-teal-300 focus-visible:text-teal-300">
-            Typescript
-          </b>{" "}
-          and{" "}
-          <b className="text-gray-200 hover:text-teal-300 focus-visible:text-teal-300">
-            Spring Boot
-          </b>{" "}
-          or{" "}
-          <b className="text-gray-200 hover:text-teal-300 focus-visible:text-teal-300">
-            Django
-          </b>{" "}
-          in my spare time. Recently I&apos;ve been playing around with{" "}
-          <b className="text-gray-200 hover:text-teal-300 focus-visible:text-teal-300">
-            IOS{" "}
-          </b>
-          development, machine learning and AI.
-        </p>
+        <PortableText value={summary} components={portableTextComponents} />
       </div>
     </section>
   );
