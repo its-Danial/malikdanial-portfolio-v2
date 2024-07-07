@@ -176,10 +176,10 @@ export type Admin = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  firstName?: string;
-  lastName?: string;
-  jobTitle?: string;
-  picture?: {
+  firstName: string;
+  lastName: string;
+  jobTitle: string;
+  picture: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -191,8 +191,8 @@ export type Admin = {
     alt?: string;
     _type: "image";
   };
-  tagline?: string;
-  summary?: Array<{
+  tagline: string;
+  summary: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
