@@ -7,7 +7,7 @@ export function useActiveSectionObserver(sectionIds: string[]) {
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.5,
+      threshold: [0.75],
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
