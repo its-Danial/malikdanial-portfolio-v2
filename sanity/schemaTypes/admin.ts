@@ -36,9 +36,6 @@ export default defineType({
           title: "Alternative Text",
           type: "string",
           validation: (Rule) => Rule.required(),
-          options: {
-            isHighlighted: true,
-          },
         },
       ],
     }),
