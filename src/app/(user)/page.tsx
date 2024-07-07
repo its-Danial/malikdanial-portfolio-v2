@@ -5,7 +5,7 @@ import Experience from "@/components/section/Experience";
 import Footer from "@/components/section/Footer";
 import Header from "@/components/section/Header";
 import Projects from "@/components/section/Projects";
-import { getMyInfo } from "@/lib/queries";
+import { fetchMyInfo } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Danial | Software Engineer",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const { firstName, jobTitle, tagline, summary } = await getMyInfo();
+  const { firstName, jobTitle, tagline, summary } = await fetchMyInfo();
 
   return (
     <div className="lg:flex lg:justify-between lg:gap-4">
