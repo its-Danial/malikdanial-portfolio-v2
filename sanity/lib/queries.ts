@@ -1,7 +1,7 @@
 import "server-only";
 
 import groq from "groq";
-import { Admin, Experience } from "../../sanity.types";
+import { Admin, Experience, Project } from "../../sanity.types";
 import { sanityFetch } from "./fetch";
 
 export async function fetchMyInfo(): Promise<Admin> {
@@ -28,7 +28,22 @@ export async function fetchExperience(): Promise<Experience[]> {
       company, 
       link, 
       description
-    }`,
+    }[0..2]`,
     tags: ["experience"],
+  });
+}
+
+export async function fetchProjects(): Promise<Project[]> {
+  return await sanityFetch({
+    query: groq`*[_type == "project"] {
+      _id, 
+      title, 
+      slug, 
+      coverImage, 
+      "technologies": technologies[]-> {_id, name, link, version},  
+      link, 
+      description
+    }`,
+    tags: ["projects"],
   });
 }
