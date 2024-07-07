@@ -4,7 +4,7 @@ type ExternalLinkProps = {
   href: string;
   ariaLabel: string;
   title: string;
-  linkLabel: string;
+  linkLabel?: string;
   outsideClick?: boolean;
   className?: React.HTMLAttributes<HTMLAnchorElement>["className"];
 };
@@ -31,7 +31,7 @@ export default function ExternalLink({
       <span>
         {title}{" "}
         <span className="inline-block">
-          {linkLabel}
+          {linkLabel && `· ${linkLabel}`}
           <RiArrowRightUpLine className="ml-1 inline-block h-4 w-4 shrink-0 translate-y-px transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none" />
         </span>
       </span>
