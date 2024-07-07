@@ -1,9 +1,10 @@
-import SectionListItem, { type SectionListItemProps } from "./SectionListItem";
+import { Experience, Project } from "../../../sanity.types";
+import SectionListItem from "./SectionListItem";
 
 type ListSectionProps = {
   id: string;
   title: string;
-  items: SectionListItemProps[];
+  items: Experience[] | Project[];
   ariaLabel: string;
   children?: React.ReactNode;
 };
@@ -28,8 +29,8 @@ export default function ListSection({
       </div>
       <div>
         <ul className="group/list">
-          {items.map((item, index) => (
-            <SectionListItem key={index} {...item} />
+          {items.map((item) => (
+            <SectionListItem key={item._id} {...item} />
           ))}
         </ul>
         {children}
