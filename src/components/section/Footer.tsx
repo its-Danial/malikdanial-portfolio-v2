@@ -24,16 +24,6 @@ export default function Footer() {
         </a>
         {", "}
         <a
-          href="https://www.sanity.io/"
-          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="Next.js (opens in a new tab)"
-        >
-          Sanity
-        </a>{" "}
-        and{" "}
-        <a
           href="https://tailwindcss.com/"
           className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
           target="_blank"
@@ -42,6 +32,26 @@ export default function Footer() {
         >
           Tailwind CSS
         </a>
+        {", "}
+        <a
+          href="https://www.sanity.io/"
+          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label="Sanity (opens in a new tab)"
+        >
+          Sanity
+        </a>{" "}
+        and{" "}
+        <a
+          href="https://umami.is/"
+          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label="Umami (opens in a new tab)"
+        >
+          Umami
+        </a>{" "}
         , deployed with{" "}
         <a
           href="https://vercel.com/"
