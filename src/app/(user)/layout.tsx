@@ -1,21 +1,18 @@
-"use client";
+import { Inter as FontSans } from "next/font/google";
 
-import ThemeProvider from "@/components/ThemeProvider";
-import Spotlight from "@/components/ui/Spotlight";
-import ThemeToggle from "@/components/ui/ThemeToggle";
-import { useMouseMove } from "@/hooks/useMouseMove";
-import { Inter } from "next/font/google";
+import LayoutWrapper from "@/components/LayoutWrapper";
 import "../globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let { mouseX, mouseY, handleMouseMove } = useMouseMove();
-
   return (
     <html lang="en" className="scroll-smooth">
       <link
@@ -38,22 +35,13 @@ export default function RootLayout({
       <link rel="icon" href="/favicon.ico" />
       {/* <WebAnalytics /> */}
       <body
-        className={`${inter.className} bg-slate-900 leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900`}
+        className={`${fontSans.variable} bg-slate-900 leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="relative" onMouseMove={handleMouseMove}>
-            <ThemeToggle />
-            <Spotlight mouseX={mouseX} mouseY={mouseY} />
-            <div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0">
-              {children}
-            </div>
+        <LayoutWrapper>
+          <div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0">
+            {children}
           </div>
-        </ThemeProvider>
+        </LayoutWrapper>
       </body>
     </html>
   );
