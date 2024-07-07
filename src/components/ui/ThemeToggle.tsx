@@ -23,9 +23,9 @@ export default function ThemeToggle(props: ThemeToggleProps) {
       aria-label="Toggle theme"
       title="Toggle theme"
       onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
-      className="absolute right-2 top-2 rounded-md bg-brightBlue/10 p-3 hover:bg-brightBlue/20 lg:right-4 lg:top-4"
+      className="absolute right-2 top-2 rounded-md bg-teal-300/10 p-3 hover:bg-teal-300/20 lg:right-4 lg:top-4"
     >
-      <Icon size={20} className="text-brightBlue" />
+      <Icon size={20} className="text-teal-300" />
     </button>
   );
 }
