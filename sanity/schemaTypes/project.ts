@@ -9,6 +9,7 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
@@ -18,16 +19,7 @@ export default defineType({
         source: "title",
         maxLength: 96,
       },
-    }),
-    defineField({
-      name: "completionDate",
-      title: "Completion Date",
-      type: "date",
-    }),
-    defineField({
-      name: "madeAt",
-      title: "Made At",
-      type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "coverImage",
@@ -41,6 +33,7 @@ export default defineType({
           name: "alt",
           type: "string",
           title: "Alternative Text",
+          validation: (Rule) => Rule.required(),
         },
       ],
     }),
@@ -49,6 +42,7 @@ export default defineType({
       title: "Technologies",
       type: "array",
       of: [{ type: "reference", to: { type: "technology" } }],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "link",
@@ -67,9 +61,5 @@ export default defineType({
       title: "title",
       media: "coverImage",
     },
-    // prepare(selection) {
-    //   const { author } = selection;
-    //   return { ...selection, subtitle: author && `by ${author}` };
-    // },
   },
 });

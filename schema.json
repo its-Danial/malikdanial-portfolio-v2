@@ -605,20 +605,6 @@
         },
         "optional": true
       },
-      "completionDate": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "madeAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "coverImage": {
         "type": "objectAttribute",
         "value": {

@@ -97,7 +97,7 @@ export type Technology = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
+  name: string;
   link?: string;
   version?: string;
 };
@@ -108,11 +108,9 @@ export type Project = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  slug?: Slug;
-  completionDate?: string;
-  madeAt?: string;
-  coverImage?: {
+  title: string;
+  slug: Slug;
+  coverImage: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -121,18 +119,12 @@ export type Project = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
+    alt: string;
     _type: "image";
   };
-  technologies?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "technology";
-  }>;
-  link?: string;
-  description?: BlockContent;
+  technologies: Technology[];
+  link: string;
+  description: BlockContent;
 };
 
 export type Slug = {
@@ -147,19 +139,13 @@ export type Experience = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  role?: string;
-  company?: string;
-  link?: string;
-  startDate?: string;
+  role: string;
+  company: string;
+  link: string;
+  startDate: string;
   endDate?: string;
-  technologies?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "technology";
-  }>;
-  description?: BlockContent;
+  technologies: Technology[];
+  description: BlockContent;
 };
 
 export type SanityFileAsset = {
@@ -190,10 +176,10 @@ export type Admin = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  firstName: string;
-  lastName: string;
-  jobTitle: string;
-  picture: {
+  firstName?: string;
+  lastName?: string;
+  jobTitle?: string;
+  picture?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -205,8 +191,25 @@ export type Admin = {
     alt?: string;
     _type: "image";
   };
-  tagline: string;
-  summary: BlockContent;
+  tagline?: string;
+  summary?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
 };
 
 export type SanityImageCrop = {

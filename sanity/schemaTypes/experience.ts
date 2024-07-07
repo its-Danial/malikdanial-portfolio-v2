@@ -1,3 +1,4 @@
+import { formatDuration } from "@/utils/functions";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
@@ -9,11 +10,13 @@ export default defineType({
       name: "role",
       title: "Role",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "company",
       title: "Company",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "link",
@@ -24,6 +27,7 @@ export default defineType({
       name: "startDate",
       title: "Start Date",
       type: "date",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "endDate",
@@ -53,10 +57,7 @@ export default defineType({
       const { startDate, endDate } = selection;
       return {
         ...selection,
-        subtitle:
-          startDate &&
-          endDate &&
-          `${new Date(startDate).getFullYear()} - ${new Date(endDate).getFullYear()}`,
+        subtitle: formatDuration({ startDate, endDate }),
       };
     },
   },
