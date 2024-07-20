@@ -1,6 +1,7 @@
 import { Inter as FontSans } from "next/font/google";
 
 import LayoutWrapper from "@/components/LayoutWrapper";
+import WebAnalytics from "@/components/WebAnalytics";
 import "../globals.css";
 
 const fontSans = FontSans({
@@ -33,7 +34,7 @@ export default function RootLayout({
         href="/favicon/favicon-16x16.png"
       />
       <link rel="icon" href="/favicon.ico" />
-      {/* <WebAnalytics /> */}
+      <WebAnalytics />
       <body
         className={`${fontSans.variable} bg-slate-900 leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900`}
       >
