@@ -35,7 +35,7 @@ export async function fetchExperience(): Promise<Experience[]> {
 
 export async function fetchProjects(): Promise<Project[]> {
   return await sanityFetch({
-    query: groq`*[_type == "project"] {
+    query: groq`*[_type == "project"] | order(date desc) {
       _id, 
       title, 
       slug, 
@@ -43,7 +43,7 @@ export async function fetchProjects(): Promise<Project[]> {
       "technologies": technologies[]-> {_id, name, link, version},  
       link, 
       description
-    }`,
+    }[0..3]`,
     tags: ["projects"],
   });
 }
