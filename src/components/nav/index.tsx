@@ -4,7 +4,7 @@ import { useActiveSectionObserver } from "@/hooks/useActiveSectionObserver";
 import Link from "next/link";
 
 export default function Nav() {
-  const sectionIds = ["about", "experience", "projects", "contact"];
+  const sectionIds = ["about", "experience", "projects"];
 
   const activeSectionId = useActiveSectionObserver(sectionIds);
 
