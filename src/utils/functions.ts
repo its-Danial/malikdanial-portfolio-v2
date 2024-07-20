@@ -1,4 +1,7 @@
-const formatDate = (dateStr: string, format: Intl.DateTimeFormatOptions) => {
+export const formatDate = (
+  dateStr: string,
+  format?: Intl.DateTimeFormatOptions,
+) => {
   const date = new Date(dateStr);
   return new Intl.DateTimeFormat("en-US", format).format(date);
 };
