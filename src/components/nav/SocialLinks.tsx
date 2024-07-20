@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function SocialLinks() {
   const socials = [
@@ -25,6 +25,7 @@ export default function SocialLinks() {
       {socials.map((social) => (
         <li key={social.label} className="shrink-0 text-xs">
           <Link
+            data-umami-event={`SOCIALS --> ${social.label}`}
             className="block hover:text-slate-200"
             href={social.link}
             target="_blank"

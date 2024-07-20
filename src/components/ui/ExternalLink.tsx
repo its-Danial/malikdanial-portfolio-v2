@@ -19,6 +19,7 @@ export default function ExternalLink({
 }: ExternalLinkProps) {
   return (
     <a
+      data-umami-event={`LINK --> ${title}${linkLabel ? ` · ${linkLabel}` : ""}`}
       className={`group/link inline-flex items-baseline text-base font-semibold leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 ${className ?? ""}`}
       href={href}
       target="_blank"

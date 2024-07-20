@@ -18,6 +18,7 @@ export default function Nav() {
         {sectionIds.map((sectionId) => (
           <li key={sectionId}>
             <Link
+              data-umami-event={`NAV --> ${sectionId}`}
               className={`group flex items-center py-3${isSectionActive(sectionId) ? " active" : ""}`}
               href={`#${sectionId}`}
             >
