@@ -1,3 +1,4 @@
+import { formatDate } from "@/utils/functions";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
@@ -20,6 +21,11 @@ export default defineType({
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "date",
+      title: "Date",
+      type: "date",
     }),
     defineField({
       name: "coverImage",
@@ -60,6 +66,14 @@ export default defineType({
     select: {
       title: "title",
       media: "coverImage",
+      date: "date",
+    },
+    prepare(selection) {
+      const { date } = selection;
+      return {
+        ...selection,
+        subtitle: formatDate(date),
+      };
     },
   },
 });
