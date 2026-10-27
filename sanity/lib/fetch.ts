@@ -1,8 +1,11 @@
 import "server-only";
 
-import { draftMode } from "next/headers";
-import type { QueryOptions, QueryParams } from "next-sanity";
-import { client } from "./client";
+import type { QueryParams } from "next-sanity";
+import { client } from "@/sanity/lib/client";
+
+// Fallback for when the Sanity webhook isn't configured; with the webhook,
+// `/api/revalidate` busts these tags as soon as a document is published.
+const REVALIDATE_TIME = 60; // seconds
 
 export async function sanityFetch<QueryResponse>({
   query,
@@ -13,18 +16,9 @@ export async function sanityFetch<QueryResponse>({
   params?: QueryParams;
   tags: string[];
 }) {
-  const isDraftMode = draftMode().isEnabled;
-
-  const REVALIDATE_SKIP_CACHE = 0;
-  const REVALIDATE_TIME = 60; // seconds (e.g., 60 for 1 minute)
-
   return client.fetch<QueryResponse>(query, params, {
-    ...(isDraftMode &&
-      ({
-        perspective: "previewDrafts",
-      } satisfies QueryOptions)),
     next: {
-      revalidate: isDraftMode ? REVALIDATE_SKIP_CACHE : REVALIDATE_TIME,
+      revalidate: REVALIDATE_TIME,
       tags,
     },
   });

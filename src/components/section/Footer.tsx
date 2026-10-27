@@ -1,78 +1,47 @@
-export default function Footer() {
+const CREDITS = {
+  editor: {
+    label: "Visual Studio Code",
+    href: "https://code.visualstudio.com/",
+  },
+  stack: [
+    { label: "Next.js", href: "https://nextjs.org/" },
+    { label: "Tailwind CSS", href: "https://tailwindcss.com/" },
+    { label: "Sanity", href: "https://www.sanity.io/" },
+    { label: "Umami", href: "https://umami.is/" },
+  ],
+  host: { label: "Vercel", href: "https://vercel.com/" },
+  font: { label: "Inter", href: "https://rsms.me/inter/" },
+};
+
+function CreditLink({ label, href }: { label: string; href: string }) {
   return (
-    <footer className="max-w-md pb-16 text-sm text-slate-500 sm:pb-0">
+    <a
+      href={href}
+      className="font-medium text-secondary-foreground transition-colors hover:text-accent focus-visible:text-accent motion-reduce:transition-none"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
+      {label}
+      <span className="sr-only"> (opens in a new tab)</span>
+    </a>
+  );
+}
+
+export default function Footer() {
+  const { editor, stack, host, font } = CREDITS;
+  const last = stack[stack.length - 1];
+
+  return (
+    <footer className="max-w-md pb-16 text-sm text-muted-foreground sm:pb-0">
       <p>
-        Coded in{" "}
-        <a
-          href="https://code.visualstudio.com/"
-          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="Visual Studio Code (opens in a new tab)"
-        >
-          Visual Studio Code
-        </a>{" "}
-        Built with{" "}
-        <a
-          href="https://nextjs.org/"
-          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="Next.js (opens in a new tab)"
-        >
-          Next.js
-        </a>
-        {", "}
-        <a
-          href="https://tailwindcss.com/"
-          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="Tailwind CSS (opens in a new tab)"
-        >
-          Tailwind CSS
-        </a>
-        {", "}
-        <a
-          href="https://www.sanity.io/"
-          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="Sanity (opens in a new tab)"
-        >
-          Sanity
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://umami.is/"
-          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="Umami (opens in a new tab)"
-        >
-          Umami
-        </a>{" "}
-        , deployed with{" "}
-        <a
-          href="https://vercel.com/"
-          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="Vercel (opens in a new tab)"
-        >
-          Vercel
-        </a>
-        . All text is set in the{" "}
-        <a
-          href="https://rsms.me/inter/"
-          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="Inter (opens in a new tab)"
-        >
-          Inter
-        </a>{" "}
-        typeface.
+        Coded in <CreditLink {...editor} />. Built with{" "}
+        {stack.slice(0, -1).map((item) => (
+          <span key={item.label}>
+            <CreditLink {...item} />,{" "}
+          </span>
+        ))}
+        and <CreditLink {...last} />, deployed with <CreditLink {...host} />.
+        All text is set in the <CreditLink {...font} /> typeface.
       </p>
     </footer>
   );

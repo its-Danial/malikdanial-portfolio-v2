@@ -18,7 +18,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*", "./public/*", "./sanity/*"]
+      "@/sanity.config": ["./sanity.config.ts"],
+      "@/sanity/*": ["./sanity/*"],
+      "@/*": ["./src/*"]
     },
     "target": "ES2017"
   },

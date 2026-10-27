@@ -2,14 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Color tokens (`--color-*` variables and the matching Tailwind colors) are
+ * generated from `COLORS` in src/utils/constants.ts by tailwind.config.ts.
+ */
+
 .nav {
   unicode-bidi: isolate;
 }
 
 .nav .active .nav-indicator {
-  @apply w-16 bg-slate-200;
+  @apply w-16 bg-foreground;
 }
 
 .nav .active .nav-text {
-  @apply text-slate-200;
+  @apply text-foreground;
 }

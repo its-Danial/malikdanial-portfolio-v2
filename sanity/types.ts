@@ -97,7 +97,7 @@ export type Technology = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name: string;
+  name?: string;
   link?: string;
   version?: string;
 };
@@ -108,9 +108,10 @@ export type Project = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
-  coverImage: {
+  title?: string;
+  slug?: Slug;
+  date?: string;
+  coverImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -119,12 +120,18 @@ export type Project = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt: string;
+    alt?: string;
     _type: "image";
   };
-  technologies: Technology[];
-  link: string;
-  description: BlockContent;
+  technologies?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "technology";
+  }>;
+  link?: string;
+  description?: BlockContent;
 };
 
 export type Slug = {
@@ -139,13 +146,19 @@ export type Experience = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  role: string;
-  company: string;
-  link: string;
-  startDate: string;
+  role?: string;
+  company?: string;
+  link?: string;
+  startDate?: string;
   endDate?: string;
-  technologies: Technology[];
-  description: BlockContent;
+  technologies?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "technology";
+  }>;
+  description?: BlockContent;
 };
 
 export type SanityFileAsset = {
@@ -176,10 +189,10 @@ export type Admin = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  firstName: string;
-  lastName: string;
-  jobTitle: string;
-  picture: {
+  firstName?: string;
+  lastName?: string;
+  jobTitle?: string;
+  picture?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -191,8 +204,8 @@ export type Admin = {
     alt?: string;
     _type: "image";
   };
-  tagline: string;
-  summary: Array<{
+  tagline?: string;
+  summary?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -269,3 +282,75 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 export declare const internalGroqTypeReferenceTo: unique symbol;
+
+// Source: ./sanity/lib/queries.ts
+// Variable: myInfoQuery
+// Query: *[_type == "admin"][0] {  firstName,  lastName,  jobTitle,  tagline,  summary}
+export type MyInfoQueryResult = {
+  firstName: string | null;
+  lastName: string | null;
+  jobTitle: string | null;
+  tagline: string | null;
+  summary: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+} | null;
+// Variable: experienceQuery
+// Query: *[_type == "experience"] | order(startDate desc) [0...$limit] {  _id,  role,  company,  link,  startDate,  endDate,  "technologies": coalesce(technologies[]->{ _id, name }, []),  description}
+export type ExperienceQueryResult = Array<{
+  _id: string;
+  role: string | null;
+  company: string | null;
+  link: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  technologies:
+    | Array<{
+        _id: string;
+        name: string | null;
+      }>
+    | Array<never>;
+  description: BlockContent | null;
+}>;
+// Variable: projectsQuery
+// Query: *[_type == "project"] | order(date desc) [0...$limit] {  _id,  title,  link,  coverImage {    alt,    asset-> {      url,      metadata { lqip, dimensions { width, height } }    }  },  "technologies": coalesce(technologies[]->{ _id, name }, []),  description}
+export type ProjectsQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  link: string | null;
+  coverImage: {
+    alt: string | null;
+    asset: {
+      url: string | null;
+      metadata: {
+        lqip: string | null;
+        dimensions: {
+          width: number | null;
+          height: number | null;
+        } | null;
+      } | null;
+    } | null;
+  } | null;
+  technologies:
+    | Array<{
+        _id: string;
+        name: string | null;
+      }>
+    | Array<never>;
+  description: BlockContent | null;
+}>;

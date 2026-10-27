@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "../globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { metadata as studioMetadata } from "next-sanity/studio/metadata";
+import { viewport as studioViewport } from "next-sanity/studio/viewport";
 
 export const metadata: Metadata = {
-  title: "CSM Studio",
-  description: "Sanity studio",
+  ...studioMetadata,
+  title: "CMS Studio",
+  description: "Sanity Studio",
+  icons: { icon: "/favicon.ico" },
 };
+
+export const viewport = studioViewport;
 
 export default function RootLayout({
   children,
@@ -16,25 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/favicon/apple-touch-icon.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="/favicon/favicon-32x32.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/favicon/favicon-16x16.png"
-      />
-      <link rel="icon" href="/favicon.ico" />
-      <body className={inter.className}>{children}</body>
+      <body style={{ margin: 0 }}>{children}</body>
     </html>
   );
 }

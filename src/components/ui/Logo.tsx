@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 type LogoProps = {
   height?: number;
   width?: number;
@@ -7,7 +5,8 @@ type LogoProps = {
 
 export default function Logo({ height, width }: LogoProps) {
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       className="rounded-full"
       src="/static/images/white-logo.png"
       width={width ?? 65}

@@ -72,7 +72,7 @@ export default defineType({
       const { date } = selection;
       return {
         ...selection,
-        subtitle: formatDate(date),
+        subtitle: date ? formatDate(date) : undefined,
       };
     },
   },

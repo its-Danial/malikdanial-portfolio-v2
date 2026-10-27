@@ -1,13 +1,10 @@
 import createImageUrlBuilder from "@sanity/image-url";
-import type { Image } from "sanity";
 
-import { dataset, projectId } from "../env";
+import { dataset, projectId } from "@/sanity/env";
 
-const imageBuilder = createImageUrlBuilder({
-  projectId: projectId || "",
-  dataset: dataset || "",
-});
+const imageBuilder = createImageUrlBuilder({ projectId, dataset });
 
-export const urlForImage = (source: Image) => {
-  return imageBuilder?.image(source).auto("format").fit("max").url();
-};
+// Accepts an asset URL (as returned by `asset->url` in queries) or any other
+// image source the builder understands.
+export const urlForImage = (source: Parameters<typeof imageBuilder.image>[0]) =>
+  imageBuilder.image(source).auto("format").fit("max");
