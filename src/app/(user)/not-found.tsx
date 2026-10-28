@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import TrackedLink from "@/components/ui/TrackedLink";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -21,12 +21,14 @@ export default function NotFound() {
       <p className="mt-4 max-w-md leading-normal">
         The page you&apos;re looking for doesn&apos;t exist or has moved.
       </p>
-      <Link
+      <TrackedLink
         href="/"
+        event="home-click"
+        eventData={{ from: "404" }}
         className="mt-8 font-semibold text-foreground transition-colors hover:text-accent focus-visible:text-accent motion-reduce:transition-none"
       >
         ← Back home
-      </Link>
+      </TrackedLink>
     </main>
   );
 }

@@ -1,5 +1,5 @@
 import { RiArrowRightUpLine } from "react-icons/ri";
-import { cn } from "@/utils/functions";
+import { type AnalyticsEvent, cn, eventAttributes } from "@/utils/functions";
 
 type ExternalLinkProps = {
   href?: string | null;
@@ -8,6 +8,9 @@ type ExternalLinkProps = {
   // Stretches the click target over the surrounding card (desktop only).
   outsideClick?: boolean;
   className?: string;
+  event?: AnalyticsEvent;
+  // Extra Umami event properties, e.g. which section the link is in.
+  eventData?: Record<string, string | null | undefined>;
 };
 
 export default function ExternalLink({
@@ -16,14 +19,15 @@ export default function ExternalLink({
   linkLabel,
   outsideClick,
   className,
+  event = "outbound-link",
+  eventData,
 }: ExternalLinkProps) {
   const label = (
     <span>
       {title}
       {linkLabel && (
         <>
-          {" "}
-          <span className="whitespace-nowrap">· {linkLabel}</span>
+          {" ·"} <span className="whitespace-nowrap">{linkLabel}</span>
         </>
       )}
       {href && (
@@ -44,7 +48,12 @@ export default function ExternalLink({
 
   return (
     <a
-      data-umami-event={`LINK --> ${title}${linkLabel ? ` · ${linkLabel}` : ""}`}
+      {...eventAttributes(event, {
+        title,
+        label: linkLabel,
+        url: href,
+        ...eventData,
+      })}
       className={cn(
         "group/link",
         baseClassName,

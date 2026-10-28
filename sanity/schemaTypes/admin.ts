@@ -40,6 +40,13 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "location",
+      title: "Location",
+      type: "string",
+      description:
+        'Shown under the tagline, e.g. "Based in Brussels, Belgium".',
+    }),
+    defineField({
       name: "tagline",
       title: "Tagline",
       type: "string",

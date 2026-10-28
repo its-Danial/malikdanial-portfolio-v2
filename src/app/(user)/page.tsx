@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
 
 import About from "@/components/section/About";
+import Education from "@/components/section/Education";
 import Experience from "@/components/section/Experience";
 import Footer from "@/components/section/Footer";
 import Header from "@/components/section/Header";
 import Projects from "@/components/section/Projects";
 import {
+  fetchEducation,
   fetchExperience,
+  fetchFeaturedProjects,
   fetchMyInfo,
-  fetchProjects,
 } from "@/sanity/lib/queries";
 import {
   BASE_OPEN_GRAPH,
   BASE_TWITTER,
+  EMAIL,
   SITE_URL,
   SOCIALS,
 } from "@/utils/constants";
@@ -31,13 +34,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [info, experience, projects] = await Promise.all([
+  const [info, experience, education, projects] = await Promise.all([
     fetchMyInfo(),
     fetchExperience(),
-    fetchProjects(),
+    fetchEducation(),
+    fetchFeaturedProjects(),
   ]);
 
-  const currentJob = experience.find((job) => !job.endDate);
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -45,10 +48,14 @@ export default async function Home() {
     jobTitle: info.jobTitle,
     description: info.tagline,
     url: SITE_URL,
-    sameAs: SOCIALS.map((social) => social.link),
-    ...(currentJob?.company && {
-      worksFor: { "@type": "Organization", name: currentJob.company },
-    }),
+    email: `mailto:${EMAIL}`,
+    sameAs: SOCIALS.map((social) => social.link).filter((link) =>
+      link.startsWith("http"),
+    ),
+    alumniOf: education.map((entry) => ({
+      "@type": "CollegeOrUniversity",
+      name: entry.institution,
+    })),
   };
 
   return (
@@ -64,10 +71,12 @@ export default async function Home() {
         firstName={info.firstName ?? ""}
         jobTitle={info.jobTitle ?? ""}
         tagline={info.tagline ?? ""}
+        location={info.location}
       />
       <main id="content" className="pt-12 md:pt-16 lg:w-1/2 lg:py-24">
         <About summary={info.summary} />
         <Experience experience={experience} />
+        <Education education={education} />
         <Projects projects={projects} />
         <Footer />
       </main>

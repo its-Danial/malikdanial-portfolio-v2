@@ -2,25 +2,26 @@ import "server-only";
 
 import { groq } from "next-sanity";
 import type {
+  EducationQueryResult,
   ExperienceQueryResult,
   MyInfoQueryResult,
   ProjectsQueryResult,
 } from "@/sanity/types";
 import { sanityFetch } from "@/sanity/lib/fetch";
 
-// How many entries the home page lists; the full history lives in the résumé.
-const EXPERIENCE_LIMIT = 3;
-const PROJECTS_LIMIT = 4;
+// Used on the home page until at least one project is marked as featured.
+const FEATURED_FALLBACK_COUNT = 4;
 
 const myInfoQuery = groq`*[_type == "admin"][0] {
   firstName,
   lastName,
   jobTitle,
   tagline,
+  location,
   summary
 }`;
 
-const experienceQuery = groq`*[_type == "experience"] | order(startDate desc) [0...$limit] {
+const experienceQuery = groq`*[_type == "experience"] | order(startDate desc) {
   _id,
   role,
   company,
@@ -31,9 +32,24 @@ const experienceQuery = groq`*[_type == "experience"] | order(startDate desc) [0
   description
 }`;
 
-const projectsQuery = groq`*[_type == "project"] | order(date desc) [0...$limit] {
+// Entries without dates (shown without a period) sort last.
+const educationQuery = groq`*[_type == "education"] | order(coalesce(startDate, "0000-01-01") desc) {
+  _id,
+  degree,
+  institution,
+  location,
+  link,
+  startDate,
+  endDate,
+  description
+}`;
+
+const projectsQuery = groq`*[_type == "project"] | order(date desc) {
   _id,
   title,
+  date,
+  featured,
+  madeAt,
   link,
   coverImage {
     alt,
@@ -63,15 +79,29 @@ export async function fetchMyInfo() {
 export async function fetchExperience() {
   return sanityFetch<ExperienceQueryResult>({
     query: experienceQuery,
-    params: { limit: EXPERIENCE_LIMIT },
     tags: ["experience", "technology"],
+  });
+}
+
+export async function fetchEducation() {
+  return sanityFetch<EducationQueryResult>({
+    query: educationQuery,
+    tags: ["education"],
   });
 }
 
 export async function fetchProjects() {
   return sanityFetch<ProjectsQueryResult>({
     query: projectsQuery,
-    params: { limit: PROJECTS_LIMIT },
     tags: ["project", "technology"],
   });
+}
+
+export async function fetchFeaturedProjects() {
+  const projects = await fetchProjects();
+  const featured = projects.filter((project) => project.featured);
+
+  return featured.length
+    ? featured
+    : projects.slice(0, FEATURED_FALLBACK_COUNT);
 }

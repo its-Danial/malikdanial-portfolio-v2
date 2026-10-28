@@ -31,14 +31,13 @@ export const COLORS = {
   glow: "#1d4ed8", // blue-700: cursor spotlight
 } as const;
 
+export const EMAIL = "azharmalikdanial@gmail.com";
+
 export const SOCIALS = [
   { label: "GitHub", link: "https://github.com/its-Danial" },
   {
     label: "LinkedIn",
     link: "https://www.linkedin.com/in/malik-danial-azhar/",
   },
-  {
-    label: "Instagram",
-    link: "https://www.instagram.com/malikdanialazhar/",
-  },
+  { label: "Email", link: `mailto:${EMAIL}` },
 ] as const;

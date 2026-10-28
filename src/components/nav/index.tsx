@@ -2,9 +2,10 @@
 
 import { useActiveSection } from "@/hooks/useActiveSection";
 import Link from "next/link";
+import { trackEvent } from "@/utils/functions";
 import { cn } from "@/utils/functions";
 
-const SECTION_IDS = ["about", "experience", "projects"] as const;
+const SECTION_IDS = ["about", "experience", "education", "projects"] as const;
 
 export default function Nav() {
   const activeSectionId = useActiveSection(SECTION_IDS);
@@ -18,7 +19,7 @@ export default function Nav() {
           return (
             <li key={sectionId}>
               <Link
-                data-umami-event={`NAV --> ${sectionId}`}
+                onClick={() => trackEvent("nav-click", { section: sectionId })}
                 className={cn(
                   "group flex items-center py-3",
                   isActive && "active",

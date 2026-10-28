@@ -1,3 +1,5 @@
+import { eventAttributes } from "@/utils/functions";
+
 const CREDITS = {
   editor: {
     label: "Visual Studio Code",
@@ -20,6 +22,7 @@ function CreditLink({ label, href }: { label: string; href: string }) {
       className="font-medium text-secondary-foreground transition-colors hover:text-accent focus-visible:text-accent motion-reduce:transition-none"
       target="_blank"
       rel="noreferrer noopener"
+      {...eventAttributes("credit-link", { name: label })}
     >
       {label}
       <span className="sr-only"> (opens in a new tab)</span>

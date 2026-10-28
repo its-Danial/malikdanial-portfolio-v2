@@ -1,5 +1,5 @@
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
-import { cn } from "@/utils/functions";
+import { cn, eventAttributes } from "@/utils/functions";
 
 type RichTextProps = {
   value: Array<{ _type: string; _key: string }> | null | undefined;
@@ -25,6 +25,7 @@ const sharedComponents: PortableTextComponents = {
           {...(isExternal && {
             target: "_blank",
             rel: "noreferrer noopener",
+            ...eventAttributes("content-link", { url: href }),
           })}
         >
           {children}

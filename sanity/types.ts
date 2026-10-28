@@ -111,6 +111,8 @@ export type Project = {
   title?: string;
   slug?: Slug;
   date?: string;
+  featured?: boolean;
+  madeAt?: string;
   coverImage?: {
     asset?: {
       _ref: string;
@@ -138,6 +140,21 @@ export type Slug = {
   _type: "slug";
   current?: string;
   source?: string;
+};
+
+export type Education = {
+  _id: string;
+  _type: "education";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  degree?: string;
+  institution?: string;
+  location?: string;
+  link?: string;
+  startDate?: string;
+  endDate?: string;
+  description?: BlockContent;
 };
 
 export type Experience = {
@@ -204,6 +221,7 @@ export type Admin = {
     alt?: string;
     _type: "image";
   };
+  location?: string;
   tagline?: string;
   summary?: Array<{
     children?: Array<{
@@ -285,12 +303,13 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: ./sanity/lib/queries.ts
 // Variable: myInfoQuery
-// Query: *[_type == "admin"][0] {  firstName,  lastName,  jobTitle,  tagline,  summary}
+// Query: *[_type == "admin"][0] {  firstName,  lastName,  jobTitle,  tagline,  location,  summary}
 export type MyInfoQueryResult = {
   firstName: string | null;
   lastName: string | null;
   jobTitle: string | null;
   tagline: string | null;
+  location: string | null;
   summary: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -311,7 +330,7 @@ export type MyInfoQueryResult = {
   }> | null;
 } | null;
 // Variable: experienceQuery
-// Query: *[_type == "experience"] | order(startDate desc) [0...$limit] {  _id,  role,  company,  link,  startDate,  endDate,  "technologies": coalesce(technologies[]->{ _id, name }, []),  description}
+// Query: *[_type == "experience"] | order(startDate desc) {  _id,  role,  company,  link,  startDate,  endDate,  "technologies": coalesce(technologies[]->{ _id, name }, []),  description}
 export type ExperienceQueryResult = Array<{
   _id: string;
   role: string | null;
@@ -327,11 +346,26 @@ export type ExperienceQueryResult = Array<{
     | Array<never>;
   description: BlockContent | null;
 }>;
+// Variable: educationQuery
+// Query: *[_type == "education"] | order(coalesce(startDate, "0000-01-01") desc) {  _id,  degree,  institution,  location,  link,  startDate,  endDate,  description}
+export type EducationQueryResult = Array<{
+  _id: string;
+  degree: string | null;
+  institution: string | null;
+  location: string | null;
+  link: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  description: BlockContent | null;
+}>;
 // Variable: projectsQuery
-// Query: *[_type == "project"] | order(date desc) [0...$limit] {  _id,  title,  link,  coverImage {    alt,    asset-> {      url,      metadata { lqip, dimensions { width, height } }    }  },  "technologies": coalesce(technologies[]->{ _id, name }, []),  description}
+// Query: *[_type == "project"] | order(date desc) {  _id,  title,  date,  featured,  madeAt,  link,  coverImage {    alt,    asset-> {      url,      metadata { lqip, dimensions { width, height } }    }  },  "technologies": coalesce(technologies[]->{ _id, name }, []),  description}
 export type ProjectsQueryResult = Array<{
   _id: string;
   title: string | null;
+  date: string | null;
+  featured: boolean | null;
+  madeAt: string | null;
   link: string | null;
   coverImage: {
     alt: string | null;

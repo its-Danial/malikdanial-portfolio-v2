@@ -28,6 +28,20 @@ export default defineType({
       type: "date",
     }),
     defineField({
+      name: "featured",
+      title: "Featured",
+      type: "boolean",
+      description:
+        "Show on the home page. Every project is listed on /archive.",
+      initialValue: false,
+    }),
+    defineField({
+      name: "madeAt",
+      title: "Made at",
+      type: "string",
+      description: "Company or context, shown in the archive table.",
+    }),
+    defineField({
       name: "coverImage",
       title: "Cover image",
       type: "image",

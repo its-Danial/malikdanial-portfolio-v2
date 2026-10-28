@@ -29,6 +29,7 @@ export default function Experience({
                   href={job.link}
                   title={job.role ?? ""}
                   linkLabel={job.company}
+                  eventData={{ section: "experience" }}
                   outsideClick
                 />
               </h3>
@@ -39,7 +40,12 @@ export default function Experience({
         ))}
       </CardList>
       <div className="mt-12">
-        <ExternalLink href="/resume.pdf" title="View Full" linkLabel="Résumé" />
+        <ExternalLink
+          href="/resume.pdf"
+          title="View Full"
+          linkLabel="Résumé"
+          event="resume-click"
+        />
       </div>
     </Section>
   );
